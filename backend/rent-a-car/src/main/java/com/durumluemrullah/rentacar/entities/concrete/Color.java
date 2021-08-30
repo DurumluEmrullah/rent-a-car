@@ -1,4 +1,4 @@
-package com.durumluemrullah.rentacar.entities;
+package com.durumluemrullah.rentacar.entities.concrete;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,22 +1,17 @@
-package com.durumluemrullah.rentacar.entities;
+package com.durumluemrullah.rentacar.entities.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+public class CarDto {
 
-public class Car {
-
-    private int carId;
-    private int brandId;
-    private int colorId;
-    private int modelYear;
+    private String colorName;
+    private String brandName;
     private double dailyPrice;
+    private int modelYear;
     private String description;
-
 }

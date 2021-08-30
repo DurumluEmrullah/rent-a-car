@@ -1,7 +1,7 @@
 package com.durumluemrullah.rentacar.controllers;
 
 import com.durumluemrullah.rentacar.dataAccess.BrandDao;
-import com.durumluemrullah.rentacar.entities.Brand;
+import com.durumluemrullah.rentacar.entities.concrete.Brand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

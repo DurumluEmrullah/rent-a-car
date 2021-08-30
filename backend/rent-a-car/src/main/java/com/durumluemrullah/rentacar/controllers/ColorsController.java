@@ -1,7 +1,7 @@
 package com.durumluemrullah.rentacar.controllers;
 
 import com.durumluemrullah.rentacar.dataAccess.ColorDao;
-import com.durumluemrullah.rentacar.entities.Color;
+import com.durumluemrullah.rentacar.entities.concrete.Color;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,7 @@
 package com.durumluemrullah.rentacar.dataAccess;
 
-import com.durumluemrullah.rentacar.entities.Car;
+import com.durumluemrullah.rentacar.entities.concrete.Car;
+import com.durumluemrullah.rentacar.entities.dtos.CarDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -55,5 +56,43 @@ public class CarDao {
         HashMap<String,Object> paramMap = new HashMap<>();
         paramMap.put("car_id",id);
         namedParameterJdbcTemplate.update(DELETE_QUERY,paramMap);
+    }
+
+    public List<CarDto> getAllCarDetails(){
+        String sql ="select \"COLORS\".name as \"color\" ,\"CARS\".daily_price ,\"BRANDS\".name as \"brand\", \"CARS\".description,\"CARS\".model_year from \"CARS\" ,\"COLORS\",\"BRANDS\" WHERE \"CARS\".color_id = \"COLORS\".color_id AND \"CARS\".brand_id=\"BRANDS\".brand_id";
+
+        List<CarDto> carDtos= namedParameterJdbcTemplate.query(sql, new RowMapper<CarDto>() {
+            @Override
+            public CarDto mapRow(ResultSet resultSet, int i) throws SQLException {
+                return new CarDto(resultSet.getString("color"),
+                        resultSet.getString("brand"),
+                        resultSet.getDouble("daily_price"),
+                        resultSet.getInt("model_year"),
+                        resultSet.getString("description"));
+            }
+        });
+        return carDtos;
+    }
+
+    public List<CarDto> filterByColorIdAndBrandId(int brandId,int colorId){
+        String sql ="select \"COLORS\".name as \"color\" ,\"CARS\".daily_price ,\"BRANDS\".name as \"brand\", \"CARS\".description,\"CARS\".model_year from \"CARS\" ,\"COLORS\",\"BRANDS\"" +
+                " WHERE \"CARS\".color_id = \"COLORS\".color_id AND \"CARS\".brand_id=\"BRANDS\".brand_id" +
+                " AND \"CARS\".color_id =:colorId AND \"CARS\".brand_id =:brandId" ;
+
+        HashMap<String,Object> filterParams= new HashMap<>();
+        filterParams.put("colorId",colorId);
+        filterParams.put("brandId",brandId);
+
+        List<CarDto> carDtos=  namedParameterJdbcTemplate.query(sql, filterParams, new RowMapper<CarDto>() {
+            @Override
+            public CarDto mapRow(ResultSet resultSet, int i) throws SQLException {
+                return new CarDto(resultSet.getString("color"),
+                        resultSet.getString("brand"),
+                        resultSet.getDouble("daily_price"),
+                        resultSet.getInt("model_year"),
+                        resultSet.getString("description"));
+            }
+        });
+        return carDtos;
     }
 }

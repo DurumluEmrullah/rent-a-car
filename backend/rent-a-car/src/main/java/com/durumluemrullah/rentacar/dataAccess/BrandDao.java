@@ -1,6 +1,6 @@
 package com.durumluemrullah.rentacar.dataAccess;
 
-import com.durumluemrullah.rentacar.entities.Brand;
+import com.durumluemrullah.rentacar.entities.concrete.Brand;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;

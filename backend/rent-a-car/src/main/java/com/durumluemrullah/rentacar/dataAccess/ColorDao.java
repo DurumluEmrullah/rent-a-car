@@ -1,6 +1,6 @@
 package com.durumluemrullah.rentacar.dataAccess;
 
-import com.durumluemrullah.rentacar.entities.Color;
+import com.durumluemrullah.rentacar.entities.concrete.Color;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

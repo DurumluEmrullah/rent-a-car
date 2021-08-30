@@ -1,7 +1,8 @@
 package com.durumluemrullah.rentacar.controllers;
 
 import com.durumluemrullah.rentacar.dataAccess.CarDao;
-import com.durumluemrullah.rentacar.entities.Car;
+import com.durumluemrullah.rentacar.entities.concrete.Car;
+import com.durumluemrullah.rentacar.entities.dtos.CarDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,5 +37,18 @@ public class CarsController {
     public ResponseEntity<String> update(@RequestBody Car car){
         carDao.update(car);
         return new ResponseEntity<>("Güncellendi", HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/getCarDetails")
+    public ResponseEntity<List<CarDto>> getCarDetails(){
+        return new ResponseEntity<>(carDao.getAllCarDetails(),HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/filterByColorIdAndBrandId/{colorId}/{brandId}")
+    public ResponseEntity<List<CarDto>> filterByColorIdAndBrandId(@PathVariable(name = "colorId") int colorId,
+                                                                  @PathVariable(name = "brandId") int brandId){
+
+
+        return new ResponseEntity<>(carDao.filterByColorIdAndBrandId(brandId,colorId),HttpStatus.OK);
     }
 }
